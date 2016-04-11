@@ -1,0 +1,36 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+	<http auto-config="true">
+		<intercept-url pattern="/home" access="permitAll" />
+		<intercept-url pattern="/admin**" access="hasRole('ADMIN')" />
+		<intercept-url pattern="/newuser" access="permitAll" />
+		<intercept-url pattern="/accessDenied" access="permitAll" />
+		<intercept-url pattern="/recoveryAccess" access="permitAll" />
+		<intercept-url pattern="/app/**" access="hasRole('ADMIN') or hasRole('USER')" />
+
+		<form-login  login-page="/login"
+                     username-parameter="username"
+                     password-parameter="password"
+                     default-target-url="/app/home" />
+       	<access-denied-handler error-page="/accessDenied" />              
+		<csrf />
+		<session-management invalid-session-url="/login" />
+	</http>
+
+	<beans:bean id="bcryptEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+
+	<authentication-manager>
+		<authentication-provider user-service-ref="customUserDetailsService">
+			<password-encoder ref="bcryptEncoder" />
+		</authentication-provider>
+	</authentication-manager>
+
+</beans:beans>
