@@ -13,4 +13,6 @@ public interface HypertensionService {
   
   List<HypertensionRecord> getHypertensionsByUserId(User id);
 
+  void deleteHypertensionById(int id);
+
 }

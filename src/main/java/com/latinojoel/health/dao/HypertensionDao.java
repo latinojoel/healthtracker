@@ -12,5 +12,7 @@ public interface HypertensionDao {
   HypertensionRecord findById(int id);
 
   List<HypertensionRecord> getHypertensionsByUserId(User id);
+
+  void deleteHypertensionById(int id);
 }
 

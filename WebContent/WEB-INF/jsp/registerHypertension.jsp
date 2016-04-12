@@ -107,10 +107,15 @@
                                     <!-- <img src="images/img.jpg" alt="">-->${user.firstName} ${user.lastName}
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
-                                <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                                    <li><a href="#"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
-                                    </li>
-                                </ul>
+								<ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
+									<li><a href="#" onclick="logoutForm();"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+									
+									<c:url var="logoutUrl" value="/logout"/>
+									<form action="${logoutUrl}" method="post" id="logoutForm">
+									    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+									</form>
+									
+								</ul></li>
                             </li>
 
                         </ul>
@@ -229,12 +234,25 @@
 
     <script src="<c:url value="/resources/js/custom.js" />"></script>
     <!-- daterangepicker -->
-    <script type="text/javascript" src="<c:url value="/resources/js/moment.min.js" />"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/moment/moment.min.js" />"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/datepicker/daterangepicker.js" />"></script>
     
 
     
     <script>
         NProgress.done();
+		function logoutForm(){
+			$("#logoutForm").submit();
+		}
+
+        $(document).ready(function () {
+            $('#date').daterangepicker({
+                singleDatePicker: true,
+                calender_style: "picker_4"
+            }, function (start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+            });
+        });
     </script>
 
     <!-- /footer content -->

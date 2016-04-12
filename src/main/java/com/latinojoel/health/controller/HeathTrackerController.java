@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -97,6 +98,12 @@ public class HeathTrackerController {
         Integer.parseInt(SecurityContextHolder.getContext().getAuthentication().getName()));
     model.addAttribute("user", user);
     return "home";
+  }
+
+  @RequestMapping(value = {"/delete-hypertension-{id}"}, method = RequestMethod.GET)
+  public String deleteHypertension(@PathVariable String id) {
+    hypertensionService.deleteHypertensionById(Integer.parseInt(id));
+    return "redirect:/app/listHypertension";
   }
 
   @RequestMapping(value = "/app/registerHypertension", method = RequestMethod.GET)

@@ -32,4 +32,8 @@ public class HypertensionServiceImpl implements HypertensionService {
     return dao.getHypertensionsByUserId(id);
   }
 
+  public void deleteHypertensionById(int id) {
+    dao.deleteHypertensionById(id);
+  }
+
 }

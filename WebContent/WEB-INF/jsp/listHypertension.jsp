@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -107,10 +108,15 @@
                                     <!-- <img src="images/img.jpg" alt="">-->${user.firstName} ${user.lastName}
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
-                                <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                                    <li><a href="#"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
-                                    </li>
-                                </ul>
+								<ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
+									<li><a href="#" onclick="logoutForm();"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+									
+									<c:url var="logoutUrl" value="/logout"/>
+									<form action="${logoutUrl}" method="post" id="logoutForm">
+									    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+									</form>
+									
+								</ul></li>
                             </li>
 
                         </ul>
@@ -153,12 +159,13 @@
                                         <tbody>
                                         <c:forEach items="${hypertensions}" var="hypertension">
 						                    <tr>
-						                        <td>${hypertension.date}</td>
+						                        <td><fmt:formatDate pattern="dd/MM/yyyy" value="${hypertension.date}" /></td>
 						                        <td>${hypertension.maxmmHg}</td>
 						                        <td>${hypertension.minmmHg}</td>
 						                        <td>${hypertension.bpm}</td>
 						                        <td>${hypertension.weight}</td>
-						                        <td>${hypertension.momentType}</td>
+						                        <td>${hypertension.momentType.label}</td>
+						                        <td><a href="<c:url value='/delete-hypertension-${hypertension.id}' />" class="btn btn-xs btn-danger custom-width">delete</a></td>
 						                    </tr>
 						                </c:forEach>
 						                </tbody>
@@ -205,12 +212,16 @@
 
     <script src="<c:url value="/resources/js/custom.js" />"></script>
     <!-- daterangepicker -->
-    <script type="text/javascript" src="<c:url value="/resources/js/moment.min.js" />"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/moment/moment.min.js" />"></script>
+    <script type="text/javascript" src="<c:url value="/resources/js/datepicker/daterangepicker.js" />"></script>
     
 
     
     <script>
         NProgress.done();
+		function logoutForm(){
+			$("#logoutForm").submit();
+		}
     </script>
 
     <!-- /footer content -->

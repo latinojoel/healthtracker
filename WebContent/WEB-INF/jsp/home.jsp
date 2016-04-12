@@ -94,7 +94,7 @@
 					<!-- /menu footer buttons -->
 					<div class="sidebar-footer hidden-small">
 						<a data-toggle="tooltip" data-placement="top" title="Logout"
-							href="/logout"> <span class="glyphicon glyphicon-off"
+							href="#" onclick="logoutForm();"> <span class="glyphicon glyphicon-off"
 							aria-hidden="true"></span>
 						</a>
 					</div>
@@ -117,10 +117,14 @@
 								aria-expanded="false"> <!-- <img src="images/img.jpg" alt="">-->${user.firstName}
 									${user.lastName} <span class=" fa fa-angle-down"></span>
 							</a>
-								<ul
-									class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-									<li><a href="#"><i class="fa fa-sign-out pull-right"></i>
-											Log Out</a></li>
+								<ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
+									<li><a href="#" onclick="logoutForm();"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+									
+									<c:url var="logoutUrl" value="/logout"/>
+									<form action="${logoutUrl}" method="post" id="logoutForm">
+									    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+									</form>
+									
 								</ul></li>
 
 						</ul>
@@ -181,6 +185,10 @@
 
 	<script>
 		NProgress.done();
+		
+		function logoutForm(){
+			$("#logoutForm").submit();
+		}
 	</script>
 	<!-- /datepicker -->
 	<!-- /footer content -->

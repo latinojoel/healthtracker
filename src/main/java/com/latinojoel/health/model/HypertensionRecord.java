@@ -25,7 +25,7 @@ public class HypertensionRecord {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
-  @DateTimeFormat(pattern = "dd-MM-yyyy")
+  @DateTimeFormat(pattern = "MM/dd/yyyy")
   @NotNull
   @Column(name = "DATE", nullable = false)
   private Date date;
