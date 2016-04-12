@@ -1,5 +1,7 @@
 package com.latinojoel.health.service.impl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,4 +35,8 @@ public class UserServiceImpl implements UserService {
     return dao.findByEmail(email);
   }
 
+  public List<User> getUsers() {
+	  return dao.getUsers();
+  }
+  
 }

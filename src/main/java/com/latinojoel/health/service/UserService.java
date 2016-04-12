@@ -1,5 +1,7 @@
 package com.latinojoel.health.service;
 
+import java.util.List;
+
 import com.latinojoel.health.model.User;
 
 public interface UserService {
@@ -10,5 +12,6 @@ public interface UserService {
 
   User findByEmail(String email);
 
-
+  List<User> getUsers();
+  
 }

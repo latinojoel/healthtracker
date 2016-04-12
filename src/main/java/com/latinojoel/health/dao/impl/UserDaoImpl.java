@@ -1,13 +1,17 @@
 package com.latinojoel.health.dao.impl;
 
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.latinojoel.health.dao.AbstractDao;
 import com.latinojoel.health.dao.UserDao;
+import com.latinojoel.health.model.HypertensionRecord;
 import com.latinojoel.health.model.User;
 
 @Repository("userDao")
@@ -34,4 +38,11 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
     return user;
   }
 
+  public List<User> getUsers() {
+    final Session session = getSession();
+    final Transaction trans = session.beginTransaction();
+    final List<User> list = session.createCriteria(User.class).addOrder(Order.desc("email")).list();
+    trans.commit();
+    return list;
+  }
 }
