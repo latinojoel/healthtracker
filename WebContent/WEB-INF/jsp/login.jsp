@@ -51,7 +51,7 @@
 			
                         <div>
                         	<input class="btn btn-default submit" name="submit" type="submit" value="Log in" />
-                            <a class="reset_pass" href="<c:url value='/recoveryAccess' />">Lost your password?</a>
+                            <!-- <a class="reset_pass" href="<c:url value='/recoveryAccess' />">Lost your password?</a>-->
                         </div>
                         <div class="clearfix"></div>
                         <div class="separator">
