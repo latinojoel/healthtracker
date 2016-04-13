@@ -13,6 +13,8 @@
 		<intercept-url pattern="/accessDenied" access="permitAll" />
 		<intercept-url pattern="/recoveryAccess" access="permitAll" />
 		<intercept-url pattern="/app/**" access="hasRole('ADMIN') or hasRole('USER')" />
+		<intercept-url pattern="/api/**" access="hasRole('USER')" />
+		<intercept-url pattern="/api/user**" access="hasRole('ADMIN')" />
 
 		<form-login  login-page="/login"
                      username-parameter="username"

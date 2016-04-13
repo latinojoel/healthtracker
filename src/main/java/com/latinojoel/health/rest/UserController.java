@@ -1,6 +1,5 @@
 package com.latinojoel.health.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,7 @@ public class UserController {
   @RequestMapping(value = "/users", method = RequestMethod.GET,
       headers = "Accept=application/json")
   public List<User> getUsers() {
-    List<User> listOfUsers = new ArrayList<User>();
-    listOfUsers = userService.getUsers();
+    final List<User> listOfUsers = userService.getUsers();
     return listOfUsers;
   }
 
